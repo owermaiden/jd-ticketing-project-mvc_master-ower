@@ -1,5 +1,6 @@
 package com.cybertek.controller;
 
+import com.cybertek.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ public class UserController {
     @GetMapping({"/create", "/add" , "/initialize"})
     public String createUser(Model model){
 
-        //model.addAttribute("user", new User());
+        model.addAttribute("user", new User());
 
         return "/user/create";
     }
