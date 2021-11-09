@@ -115,11 +115,9 @@
                           <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                               <label >Choose a Role</label>
-                              <select name="roles" class="custom-select" aria-label="Default select example">
-                                <option selected>Select</option>
-                                <option value="1">Admin</option>
-                                <option value="2">User</option>
-                                <option value="3">Manager</option>
+                              <select name="roles" th:field="*{role}" class="custom-select" aria-label="Default select example">
+                                  <option th:value=" ''" th:text="Select"></option>
+                                  <option th:each="theRole : ${roles}" th:value="${theRole}" th:text="${theRole}"></option>
                               </select>
                             </div>
                           </div>
