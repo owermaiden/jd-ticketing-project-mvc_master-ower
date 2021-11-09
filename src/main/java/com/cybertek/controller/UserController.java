@@ -1,6 +1,7 @@
 package com.cybertek.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping("/create")
-    public String createUser(){
+    @GetMapping({"/create", "/add" , "/initialize"})
+    public String createUser(Model model){
+
+        //model.addAttribute("user", new User());
 
         return "/user/create";
     }
