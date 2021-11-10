@@ -16,18 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     RoleService roleService;
+    UserService userService;
 
     @Autowired
-    public UserController(RoleService roleService) {
+    public UserController(RoleService roleService, UserService userService) {
         this.roleService = roleService;
+        this.userService = userService;
     }
 
     @GetMapping({"/create", "/add" , "/initialize"})
     public String createUser(Model model){
 
         model.addAttribute("user", new UserDTO());
-        var roles = roleService.findAll().stream().map(RoleDTO::getDescription).toArray();
-        model.addAttribute("roles", roles);
+        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("users", userService.findAll());
 
         return "/user/create";
     }

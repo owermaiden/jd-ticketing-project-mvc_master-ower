@@ -117,7 +117,7 @@
                               <label >Choose a Role</label>
                               <select name="roles" th:field="*{role}" class="custom-select" aria-label="Default select example">
                                   <option th:value=" ''" th:text="Select"></option>
-                                  <option th:each="theRole : ${roles}" th:value="${theRole}" th:text="${theRole}"></option>
+                                  <option th:each="theRole : ${roles}" th:value="${theRole.id}" th:text="${theRole.description}"></option>
                               </select>
                             </div>
                           </div>
@@ -161,49 +161,16 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td>Ower</td>
-                                  <td>owermaiden@gmail.com</td>
-                                  <td>Male</td>
-                                  <td>4345556677</td>
-                                  <td>Admin</td>
+                              <tr th:each="user : ${users}">
+                                  <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+                                  <td th:text="${user.userName}">owermaiden@gmail.com</td>
+                                  <td th:text="${user.gender}">Male</td>
+                                  <td th:text="${user.phone}">4345556677</td>
+                                  <td th:text="${user.role.description}">Admin</td>
                                   <td class="action">
                                     <a class="btn btn-warning" href="#" role="button">Update</a>
                                     <a class="btn btn-danger" href="#" role="button">Delete</a>
                                   </td>
-                              </tr>
-                              <tr>
-                                  <td>Ower</td>
-                                  <td>owermaiden@gmail.com</td>
-                                  <td>Male</td>
-                                  <td>4345556677</td>
-                                  <td>Admin</td>
-                                  <td class="action">
-                                    <a class="btn btn-warning" href="#" role="button">Update</a>
-                                    <a class="btn btn-danger" href="#" role="button">Delete</a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>Ower</td>
-                                  <td>owermaiden@gmail.com</td>
-                                  <td>Male</td>
-                                  <td>4345556677</td>
-                                  <td>Admin</td>
-                                  <td class="action">
-                                    <a class="btn btn-warning" href="#" role="button">Update</a>
-                                    <a class="btn btn-danger" href="#" role="button">Delete</a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>Ower</td>
-                                  <td>owermaiden@gmail.com</td>
-                                  <td>Male</td>
-                                  <td>4345556677</td>
-                                  <td>Admin</td>
-                                  <td class="action">
-                                    <a class="btn btn-warning" href="#" role="button">Update</a>
-                                    <a class="btn btn-danger" href="#" role="button">Delete</a>
-                                </td>
                               </tr>
                           </tbody>
                         </table>
