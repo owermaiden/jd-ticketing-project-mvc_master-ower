@@ -101,13 +101,13 @@
                               <label class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" name="radio-inline" checked=""
                                        class="custom-control-input"
-                                       th:field="*{gender}" th:value="Male"
+                                       th:field="*{gender}" th:value="MALE"
                                 ><span class="custom-control-label">Male</span>
                               </label>
                               <label class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" name="radio-inline"
                                        class="custom-control-input"
-                                       th:field="*{gender}" th:value="Female"
+                                       th:field="*{gender}" th:value="FEMALE"
                                 ><span class="custom-control-label">Female</span>
                               </label>
                             </div>
@@ -164,7 +164,7 @@
                               <tr th:each="user : ${users}">
                                   <td th:text="${user.firstName + ' ' + user.lastName}"></td>
                                   <td th:text="${user.userName}">owermaiden@gmail.com</td>
-                                  <td th:text="${user.gender}">Male</td>
+                                  <td th:text="${user.gender.value}">Male</td>
                                   <td th:text="${user.phone}">4345556677</td>
                                   <td th:text="${user.role.description}">Admin</td>
                                   <td class="action">
