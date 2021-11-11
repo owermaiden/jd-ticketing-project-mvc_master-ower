@@ -1,6 +1,5 @@
 package com.cybertek.controller;
 
-import com.cybertek.dto.RoleDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.service.RoleService;
 import com.cybertek.service.UserService;
@@ -66,6 +65,18 @@ public class UserController {
         model.addAttribute("users", userService.findAll());
 
         return "/user/create";
+    }
+
+    @GetMapping("/delete/{username}")
+    public String deleteUserById(@PathVariable("username") String username, Model model){
+
+        userService.deleteById(username);
+        model.addAttribute("user", new UserDTO());
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("roles", roleService.findAll());
+
+        return "/user/create";
+
     }
 
 
