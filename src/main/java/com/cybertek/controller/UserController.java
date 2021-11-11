@@ -41,7 +41,7 @@ public class UserController {
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("users", userService.findAll());
 
-        return "redirect:/user/create";
+        return "redirect:/user/create";  // redirect calls the GetMapping instead of view...
     }
 
     @GetMapping("/update/{username}")
@@ -64,7 +64,7 @@ public class UserController {
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("users", userService.findAll());
 
-        return "/user/create";
+        return "redirect:/user/create";
     }
 
     @GetMapping("/delete/{username}")
@@ -75,7 +75,7 @@ public class UserController {
         model.addAttribute("users", userService.findAll());
         model.addAttribute("roles", roleService.findAll());
 
-        return "/user/create";
+        return "redirect:/user/create";
 
     }
 
