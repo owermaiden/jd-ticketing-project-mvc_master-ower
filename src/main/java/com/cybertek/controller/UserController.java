@@ -36,11 +36,6 @@ public class UserController {
     public String saveUser(UserDTO user, Model model){
 
         userService.save(user);
-
-        model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles", roleService.findAll());
-        model.addAttribute("users", userService.findAll());
-
         return "redirect:/user/create";  // redirect calls the GetMapping instead of view...
     }
 
@@ -59,23 +54,14 @@ public class UserController {
     public String updateUser(@PathVariable("username") String username,UserDTO user, Model model){
 
         userService.update(user);
-
-        model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles", roleService.findAll());
-        model.addAttribute("users", userService.findAll());
-
-        return "redirect:/user/create";
+        return "redirect:/user/create";  // redirect calls the GetMapping instead of view...
     }
 
     @GetMapping("/delete/{username}")
     public String deleteUserById(@PathVariable("username") String username, Model model){
 
         userService.deleteById(username);
-        model.addAttribute("user", new UserDTO());
-        model.addAttribute("users", userService.findAll());
-        model.addAttribute("roles", roleService.findAll());
-
-        return "redirect:/user/create";
+        return "redirect:/user/create";  // redirect calls the GetMapping instead of view...
 
     }
 

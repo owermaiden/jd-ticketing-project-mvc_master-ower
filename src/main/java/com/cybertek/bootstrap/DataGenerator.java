@@ -1,24 +1,36 @@
 package com.cybertek.bootstrap;
 
+import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.RoleDTO;
 import com.cybertek.dto.UserDTO;
+import com.cybertek.service.ProjectService;
 import com.cybertek.service.RoleService;
 import com.cybertek.service.UserService;
 import com.cybertek.utils.Gender;
+import com.cybertek.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class DataGenerator implements CommandLineRunner {
 
     RoleService roleService;
     UserService userService;
+    ProjectService projectService;
 
     @Autowired
-    public DataGenerator(RoleService roleService, UserService userService) {
+    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService) {
         this.roleService = roleService;
         this.userService = userService;
+        this.projectService = projectService;
     }
 
     @Override
@@ -48,6 +60,19 @@ public class DataGenerator implements CommandLineRunner {
         userService.save(user3);
         userService.save(user4);
         userService.save(user5);
+
+        // List<UserDTO> managers = userService.findAll().stream().filter(user -> user.getRole().getDescription().equals("manager")).collect(Collectors.toList());
+
+        ProjectDTO project1 = new ProjectDTO("Ticketing", "100.1", user3,
+                LocalDate.of(2005,01,12), LocalDate.of(2005, 02, 12),
+                "A normal project", Status.IN_PROGRESS);
+        ProjectDTO project2 = new ProjectDTO("Ticketing2", "100.2", user3,
+                LocalDate.of(2006,01,12), LocalDate.of(2006, 02, 12),
+                "Second normal project", Status.COMPLETE);
+        ProjectDTO project3 = new ProjectDTO("Ticketing3", "100.3", user3,
+                LocalDate.of(2007,01,12), LocalDate.of(2007, 02, 12),
+                "Third normal project", Status.OPEN);
+
 
 
     }
