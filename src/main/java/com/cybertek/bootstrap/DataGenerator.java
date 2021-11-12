@@ -44,15 +44,15 @@ public class DataGenerator implements CommandLineRunner {
         roleService.save(managerRole);
         roleService.save(employeeRole);
 
-        UserDTO user1 = new UserDTO("John", "Kessy", "admin@cybertek.com",
+        UserDTO user1 = new UserDTO("John", "Mary", "admin@cybertek.com",
                 "abc", true, "7454453458", adminRole, Gender.MALE);
         UserDTO user2 = new UserDTO("John", "Kessy", "admin2@cybertek.com",
                 "abc", true, "7454453458", adminRole, Gender.MALE);
-        UserDTO user3 = new UserDTO("John", "Kessy", "manager@cybertek.com",
+        UserDTO user3 = new UserDTO("Adem", "Kessy", "manager@cybertek.com",
                 "abc", true, "7454453457", managerRole, Gender.MALE);
         UserDTO user4 = new UserDTO("John", "Kessy", "employee@cybertek.com",
                 "abc", false, "7454453458", employeeRole, Gender.FEMALE);
-        UserDTO user5 = new UserDTO("John", "Kessy", "employee2@cybertek.com",
+        UserDTO user5 = new UserDTO("John", "Ozzy", "employee2@cybertek.com",
                 "abc", false, "7454433458", employeeRole, Gender.MALE);
 
         userService.save(user1);
@@ -63,15 +63,19 @@ public class DataGenerator implements CommandLineRunner {
 
         // List<UserDTO> managers = userService.findAll().stream().filter(user -> user.getRole().getDescription().equals("manager")).collect(Collectors.toList());
 
-        ProjectDTO project1 = new ProjectDTO("Ticketing", "100.1", user3,
-                LocalDate.of(2005,01,12), LocalDate.of(2005, 02, 12),
-                "A normal project", Status.IN_PROGRESS);
-        ProjectDTO project2 = new ProjectDTO("Ticketing2", "100.2", user3,
+        ProjectDTO project1 = new ProjectDTO("Spring", "PR01", user3,
+                LocalDate.now(), LocalDate.now().plusDays(25),
+                "Creating controllers", Status.IN_PROGRESS);
+        ProjectDTO project2 = new ProjectDTO("Ticketing2", "PR02", user3,
                 LocalDate.of(2006,01,12), LocalDate.of(2006, 02, 12),
                 "Second normal project", Status.COMPLETE);
-        ProjectDTO project3 = new ProjectDTO("Ticketing3", "100.3", user3,
+        ProjectDTO project3 = new ProjectDTO("Ticketing3", "PR03", user3,
                 LocalDate.of(2007,01,12), LocalDate.of(2007, 02, 12),
                 "Third normal project", Status.OPEN);
+
+        projectService.save(project1);
+        projectService.save(project2);
+        projectService.save(project3);
 
 
 

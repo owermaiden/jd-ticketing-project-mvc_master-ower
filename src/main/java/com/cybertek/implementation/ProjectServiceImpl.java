@@ -1,10 +1,7 @@
 package com.cybertek.implementation;
 
 import com.cybertek.dto.ProjectDTO;
-import com.cybertek.dto.UserDTO;
 import com.cybertek.service.ProjectService;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +36,6 @@ public class ProjectServiceImpl extends AbstractMapService<ProjectDTO, String> i
 
     @Override
     public void update(ProjectDTO object) {
-        super.deleteById(object.getProjectCode());
-        super.save(object.getProjectCode(), object);
+        super.update(object.getProjectCode(), object);
     }
 }
