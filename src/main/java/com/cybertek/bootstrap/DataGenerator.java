@@ -12,15 +12,9 @@ import com.cybertek.utils.Gender;
 import com.cybertek.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 public class DataGenerator implements CommandLineRunner {
@@ -91,8 +85,8 @@ public class DataGenerator implements CommandLineRunner {
         projectService.save(project2);
         projectService.save(project3);
 
-        TaskDTO task1 = new TaskDTO(1L, project1, user1, "Konusu", "alıstırma", Status.OPEN, LocalDate.of(2006, 02, 12));
-        TaskDTO task2 = new TaskDTO(2L, project2, user2, "Acayip", "alıstırma2", Status.OPEN, LocalDate.of(2006, 02, 12));
+        TaskDTO task1 = new TaskDTO(project1, user1, "Konusu", "alıstırma", Status.OPEN, LocalDate.of(2006, 02, 12));
+        TaskDTO task2 = new TaskDTO(project2, user2, "Acayip", "alıstırma2", Status.OPEN, LocalDate.of(2006, 02, 12));
 
 
         taskService.save(task1);

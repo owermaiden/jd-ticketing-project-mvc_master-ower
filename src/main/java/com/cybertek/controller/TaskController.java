@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/task")
@@ -43,9 +44,10 @@ public class TaskController {
     @PostMapping("/create")
     public String insertTask(TaskDTO task){
 
-        taskService.save(task);
         task.setTaskStatus(Status.OPEN);
         task.setAssignedDate(LocalDate.now());
+        task.setId(UUID.randomUUID().getMostSignificantBits());  // we let spring generate İD....
+        taskService.save(task);
 
         return "redirect:/task/create";
 
