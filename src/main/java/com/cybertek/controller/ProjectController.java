@@ -40,7 +40,7 @@ public class ProjectController {
 
     @PostMapping("/create")
     // public String saveUser(@ModelAttribute("user") UserDTO user, Model model){   // we dont need to use @ModelAttribute anymore......
-    public String saveProject(ProjectDTO project, Model model){
+    public String saveProject(ProjectDTO project){
 
         projectService.save(project);
         project.setProjectStatus(Status.OPEN);
@@ -76,7 +76,7 @@ public class ProjectController {
     }
 
     @PostMapping("/update/{projectCode}")
-    public String updateProject(@PathVariable("projectCode") String projectcode,ProjectDTO project, Model model){
+    public String updateProject(ProjectDTO project){
 
         projectService.update(project);
         return "redirect:/project/create";  // redirect calls the GetMapping instead of view...

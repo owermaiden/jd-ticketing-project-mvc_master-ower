@@ -2,14 +2,17 @@ package com.cybertek.bootstrap;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.RoleDTO;
+import com.cybertek.dto.TaskDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.service.ProjectService;
 import com.cybertek.service.RoleService;
+import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
 import com.cybertek.utils.Gender;
 import com.cybertek.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -25,12 +28,14 @@ public class DataGenerator implements CommandLineRunner {
     RoleService roleService;
     UserService userService;
     ProjectService projectService;
+    TaskService taskService;
 
     @Autowired
-    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService) {
+    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService, TaskService taskService) {
         this.roleService = roleService;
         this.userService = userService;
         this.projectService = projectService;
+        this.taskService = taskService;
     }
 
     @Override
@@ -86,6 +91,12 @@ public class DataGenerator implements CommandLineRunner {
         projectService.save(project2);
         projectService.save(project3);
 
+        TaskDTO task1 = new TaskDTO(1L, project1, user1, "Konusu", "alıstırma", Status.OPEN, LocalDate.of(2006, 02, 12));
+        TaskDTO task2 = new TaskDTO(2L, project2, user2, "Acayip", "alıstırma2", Status.OPEN, LocalDate.of(2006, 02, 12));
+
+
+        taskService.save(task1);
+        taskService.save(task2);
 
 
     }
