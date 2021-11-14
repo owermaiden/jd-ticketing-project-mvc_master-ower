@@ -32,7 +32,7 @@ public class ProjectController {
 
         model.addAttribute("project", new ProjectDTO());
         model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("managers", userService.findAll());
+        model.addAttribute("managers", userService.findManagers());
         //model.addAttribute("managers", userService.findAll().stream().filter(user -> user.getRole().getDescription().equals("manager")).collect(Collectors.toList()));
 
         return "/project/create";
@@ -53,7 +53,7 @@ public class ProjectController {
 
         model.addAttribute("project", projectService.findById(projectCode));
         model.addAttribute("projects", projectService.findAll());
-        model.addAttribute("managers", userService.findAll());
+        model.addAttribute("managers", userService.findManagers());
 
         return "/project/update";
 

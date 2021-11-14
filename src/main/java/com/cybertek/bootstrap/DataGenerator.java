@@ -53,6 +53,12 @@ public class DataGenerator implements CommandLineRunner {
         UserDTO user4 = new UserDTO("John", "Kessy", "employee@cybertek.com",
                 "abc", false, "7454453458", employeeRole, Gender.FEMALE);
         UserDTO user5 = new UserDTO("John", "Ozzy", "employee2@cybertek.com",
+                "abc", false, "7454433458", managerRole, Gender.MALE);
+        UserDTO user6 = new UserDTO("John", "Ozzy", "employee3@cybertek.com",
+                "abc", false, "7454433458", employeeRole, Gender.MALE);
+        UserDTO user7 = new UserDTO("John", "Ozzy", "employee4@cybertek.com",
+                "abc", false, "7454433458", managerRole, Gender.MALE);
+        UserDTO user8 = new UserDTO("John", "Ozzy", "employee5@cybertek.com",
                 "abc", false, "7454433458", employeeRole, Gender.MALE);
 
         userService.save(user1);
@@ -60,6 +66,9 @@ public class DataGenerator implements CommandLineRunner {
         userService.save(user3);
         userService.save(user4);
         userService.save(user5);
+        userService.save(user6);
+        userService.save(user7);
+        userService.save(user8);
 
         // List<UserDTO> managers = userService.findAll().stream().filter(user -> user.getRole().getDescription().equals("manager")).collect(Collectors.toList());
 
