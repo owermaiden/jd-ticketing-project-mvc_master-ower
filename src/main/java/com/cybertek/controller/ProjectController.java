@@ -48,6 +48,22 @@ public class ProjectController {
         return "redirect:/project/create";  // redirect calls the GetMapping instead of view...
     }
 
+    @GetMapping("/delete/{projectCode}")
+    public String deleteProjectById(@PathVariable("projectCode") String projectcode, Model model){
+
+        projectService.deleteById(projectcode);
+        return "redirect:/project/create";  // redirect calls the GetMapping instead of view...
+
+    }
+
+    @GetMapping("/complete/{projectcode}")
+    public String copleteProject(@PathVariable("projectcode") String projectCode, Model model){
+
+        projectService.complete(projectService.findById(projectCode));
+        return "redirect:/project/create";
+    }
+
+
     @GetMapping("/update/{projectCode}")
     public String editProject(@PathVariable("projectCode") String projectCode, Model model){
 
@@ -64,13 +80,5 @@ public class ProjectController {
 
         projectService.update(project);
         return "redirect:/project/create";  // redirect calls the GetMapping instead of view...
-    }
-
-    @GetMapping("/delete/{projectCode}")
-    public String deleteProjectById(@PathVariable("projectCode") String projectcode, Model model){
-
-        projectService.deleteById(projectcode);
-        return "redirect:/project/create";  // redirect calls the GetMapping instead of view...
-
     }
 }

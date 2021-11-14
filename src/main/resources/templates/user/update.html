@@ -116,24 +116,23 @@
                                                 <div class="form-group">
                                                     <label >Choose a Role</label>
                                                     <!-- th:field and th:select doesnt work at the same time,  -->
-                                                    <select name="role"  class="custom-select" aria-label="Default select example">
-                                                        <option th:value=" ''" th:text="Select"></option>
-                                                        <option th:each="theRole : ${roles}" th:value="${theRole.id}"
-                                                                th:text="${theRole.description}" th:selected="${theRole.id} == ${user.role.id}"></option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row float-right">
-                                            <div class="col-sm-6 col-md-12 col-lg-12" >
-                                                <button type="submit" class="btn btn-success">Save</button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
+                                                    <select th:field="*{role}"  class="custom-select" aria-label="Default select example">
+                                                        <!-- <option th:value=" ''" th:text="Select"></option>    Bu bölümü sildik....-->
+                                                         <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.description}"></option>
+                                                     </select>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <div class="row float-right">
+                                             <div class="col-sm-6 col-md-12 col-lg-12" >
+                                                 <button type="submit" class="btn btn-success">Save</button>
+                                             </div>
+                                         </div>
+                                         <div class="row">
 
-                                        </div>
-                                    </form>
-                                    <!-- ------------------------FORM END----------------------------- -->
+                                         </div>
+                                     </form>
+                                     <!-- ------------------------FORM END----------------------------- -->
                                 </div>
                             </section>
                         </div>

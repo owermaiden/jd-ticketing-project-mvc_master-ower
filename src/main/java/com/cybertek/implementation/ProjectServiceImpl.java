@@ -2,6 +2,7 @@ package com.cybertek.implementation;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.service.ProjectService;
+import com.cybertek.utils.Status;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +38,11 @@ public class ProjectServiceImpl extends AbstractMapService<ProjectDTO, String> i
     @Override
     public void update(ProjectDTO object) {
         super.update(object.getProjectCode(), object);
+    }
+
+    @Override
+    public void complete(ProjectDTO project) {
+        project.setProjectStatus(Status.COMPLETE);
+        super.save(project.getProjectCode(), project);  // Dont forget to save your change to Map....
     }
 }
