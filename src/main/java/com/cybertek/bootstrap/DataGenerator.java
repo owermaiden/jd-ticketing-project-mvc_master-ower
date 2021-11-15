@@ -74,10 +74,10 @@ public class DataGenerator implements CommandLineRunner {
         ProjectDTO project1 = new ProjectDTO("Spring", "PR01", user3,
                 LocalDate.now(), LocalDate.now().plusDays(25),
                 "Creating controllers", Status.IN_PROGRESS);
-        ProjectDTO project2 = new ProjectDTO("Ticketing2", "PR02", user3,
+        ProjectDTO project2 = new ProjectDTO("Ticketing2", "PR02", user2,
                 LocalDate.of(2006,01,12), LocalDate.of(2006, 02, 12),
                 "Second normal project", Status.COMPLETE);
-        ProjectDTO project3 = new ProjectDTO("Ticketing3", "PR03", user3,
+        ProjectDTO project3 = new ProjectDTO("Ticketing3", "PR03", user2,
                 LocalDate.of(2007,01,12), LocalDate.of(2007, 02, 12),
                 "Third normal project", Status.OPEN);
 

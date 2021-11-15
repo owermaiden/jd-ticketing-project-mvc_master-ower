@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends AbstractMapService<UserDTO, String> implements UserService {
+
     @Override
     public List<UserDTO> findAll() {
         return super.findAll();
