@@ -45,19 +45,19 @@ public class DataGenerator implements CommandLineRunner {
 
         UserDTO user1 = new UserDTO("John", "Mary", "admin@cybertek.com",
                 "abc", true, "7454453458", adminRole, Gender.MALE);
-        UserDTO user2 = new UserDTO("John", "Kessy", "admin2@cybertek.com",
-                "abc", true, "7454453458", adminRole, Gender.MALE);
+        UserDTO user2 = new UserDTO("Mike", "Hesta", "manageer@cybertek.com",
+                "abc", true, "7454453458", managerRole, Gender.MALE);
         UserDTO user3 = new UserDTO("Adem", "Kessy", "manager@cybertek.com",
                 "abc", true, "7454453457", managerRole, Gender.MALE);
-        UserDTO user4 = new UserDTO("John", "Kessy", "employee@cybertek.com",
+        UserDTO user4 = new UserDTO("Ower", "Maiden", "employee@cybertek.com",
                 "abc", false, "7454453458", employeeRole, Gender.FEMALE);
-        UserDTO user5 = new UserDTO("John", "Ozzy", "employee2@cybertek.com",
+        UserDTO user5 = new UserDTO("Yalan", "Dunya", "employee2@cybertek.com",
                 "abc", false, "7454433458", managerRole, Gender.MALE);
-        UserDTO user6 = new UserDTO("John", "Ozzy", "employee3@cybertek.com",
+        UserDTO user6 = new UserDTO("Ozzy", "False", "employee3@cybertek.com",
                 "abc", false, "7454433458", employeeRole, Gender.MALE);
-        UserDTO user7 = new UserDTO("John", "Ozzy", "employee4@cybertek.com",
-                "abc", false, "7454433458", managerRole, Gender.MALE);
-        UserDTO user8 = new UserDTO("John", "Ozzy", "employee5@cybertek.com",
+        UserDTO user7 = new UserDTO("Enchor", "Mask", "employee4@cybertek.com",
+                "abc", false, "7454433458", managerRole, Gender.FEMALE);
+        UserDTO user8 = new UserDTO("Create", "Form", "employee5@cybertek.com",
                 "abc", false, "7454433458", employeeRole, Gender.MALE);
 
         userService.save(user1);
