@@ -28,7 +28,7 @@
                 <li class="nav-divider"></li>
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
+                    th:class="${#httpServletRequest.requestURI.contains('user') || #httpServletRequest.requestURI.contains('project/create')} ? 'nav-link active' : 'nav-link'"
                     href="#"
                     data-toggle="collapse"
                     aria-expanded="false"
@@ -55,7 +55,7 @@
 
                 <li class="nav-item">
                   <a
-                    class="nav-link"
+                    th:class="${#httpServletRequest.requestURI.contains('task') || #httpServletRequest.requestURI.contains('project/manager') } ? 'nav-link active' : 'nav-link'"
                     href="#"
                     data-toggle="collapse"
                     aria-expanded="false"
@@ -82,7 +82,7 @@
 
                 <li class="nav-item">
                   <a
-                    class="nav-link"
+                    th:class="${#httpServletRequest.requestURI.contains('employee')} ? 'nav-link active' : 'nav-link'"
                     href="#"
                     data-toggle="collapse"
                     aria-expanded="false"
