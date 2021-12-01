@@ -26,7 +26,7 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDTO> listAllRoles() {
        List<Role> list = roleRepository.findAll();
        // we need to convert Role to RoleDTO.............mappers
-       return list.stream().map(obj -> { return roleMapper.convertToDto(obj);}).collect(Collectors.toList());
+       return list.stream().map(obj -> roleMapper.convertToDto(obj)).collect(Collectors.toList());
     }
 
     @Override

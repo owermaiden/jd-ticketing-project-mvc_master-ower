@@ -5,16 +5,18 @@ import com.cybertek.entity.User;
 import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.UserRepository;
 import com.cybertek.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Component
+@Service
 public class UserServiceImpl implements UserService {
 
-    UserMapper userMapper;
-    UserRepository userRepository;
+    private UserMapper userMapper;
+    private UserRepository userRepository;
 
     public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
         this.userMapper = userMapper;
@@ -23,7 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> listAllUsers() {
-        return null;
+        List<User> users = userRepository.findAll(Sort.by("firstName"));
+        return users.stream().map(obj -> userMapper.convertToDto(obj)).collect(Collectors.toList());
     }
 
     @Override
@@ -39,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO update(UserDTO dto) {
-        User user = userMapper.convertToEntity(dto);
+        //User user = userMapper.convertToEntity(dto);
         return null;
     }
 
