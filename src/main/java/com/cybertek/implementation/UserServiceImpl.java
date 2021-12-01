@@ -1,52 +1,50 @@
 package com.cybertek.implementation;
 
 import com.cybertek.dto.UserDTO;
+import com.cybertek.entity.User;
+import com.cybertek.mapper.UserMapper;
+import com.cybertek.repository.UserRepository;
 import com.cybertek.service.UserService;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Service
-public class UserServiceImpl extends AbstractMapService<UserDTO, String> implements UserService {
+@Component
+public class UserServiceImpl implements UserService {
 
-    @Override
-    public List<UserDTO> findAll() {
-        return super.findAll();
+    UserMapper userMapper;
+    UserRepository userRepository;
+
+    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
+        this.userMapper = userMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void deleteById(String id) {
-        super.deleteById(id);
+    public List<UserDTO> listAllUsers() {
+        return null;
     }
 
     @Override
-    public void update(UserDTO object) {
-        super.update(object.getUserName(), object);
+    public UserDTO findByUserName(String username) {
+        return null;
     }
 
     @Override
-    public void delete(UserDTO object) {
-        super.delete(object);
+    public void save(UserDTO dto) {
+        User user = userMapper.convertToEntity(dto);
+        userRepository.save(user);
     }
 
     @Override
-    public UserDTO save(UserDTO object) {
-        return super.save(object.getUserName(), object);
+    public UserDTO update(UserDTO dto) {
+        User user = userMapper.convertToEntity(dto);
+        return null;
     }
 
     @Override
-    public UserDTO findById(String id) {
-        return super.findById(id);
-    }
+    public void delete(String username) {
 
-    @Override
-    public List<UserDTO> findManagers() {
-        return super.findAll().stream().filter(user -> user.getRole().getId() == 2).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<UserDTO> findEmployees() {
-        return super.findAll().stream().filter(user -> user.getRole().getId() == 3).collect(Collectors.toList());
     }
 }
