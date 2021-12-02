@@ -6,7 +6,6 @@ import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.UserRepository;
 import com.cybertek.service.UserService;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,6 +59,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUserName(username);
         user.setIsDeleted(true);
         userRepository.save(user);
+    }
+
+    @Override
+    public List<UserDTO> listAllByRole(String role) {
+       List<User> users = userRepository.findAllByRoleDescriptionIgnoreCase(role);
+       return  users.stream().map(obj -> userMapper.convertToDto(obj)).collect(Collectors.toList());
     }
 
     // hard delete -- not good

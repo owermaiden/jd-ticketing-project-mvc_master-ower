@@ -1,6 +1,6 @@
 package com.cybertek.dto;
 
-import com.cybertek.utils.Status;
+import com.cybertek.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.cybertek.dto;
 
-import com.cybertek.utils.Gender;
+import com.cybertek.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

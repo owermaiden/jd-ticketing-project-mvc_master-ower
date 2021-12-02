@@ -1,6 +1,6 @@
 package com.cybertek.entity;
 
-import com.cybertek.utils.Gender;
+import com.cybertek.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor

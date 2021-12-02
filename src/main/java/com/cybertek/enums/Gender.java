@@ -1,4 +1,4 @@
-package com.cybertek.utils;
+package com.cybertek.enums;
 
 public enum Gender {
     MALE("Male"), FEMALE("Female");
