@@ -11,4 +11,6 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     Project findByProjectCode(String code);
+
+    List<Project> findProjectsByAssignedManager(User assignedManager);
 }

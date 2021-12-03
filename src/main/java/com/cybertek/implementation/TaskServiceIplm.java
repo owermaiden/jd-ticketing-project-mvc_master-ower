@@ -63,4 +63,14 @@ public class TaskServiceIplm implements TaskService {
         }
     }
 
+    @Override
+    public int totalNonCompletedTasks(String projectCode) {
+        return taskRepository.totalNonCompleteTask(projectCode);
+    }
+
+    @Override
+    public int totalCompletedTasks(String projectCode) {
+        return taskRepository.totalCompleteTask(projectCode);
+    }
+
 }
