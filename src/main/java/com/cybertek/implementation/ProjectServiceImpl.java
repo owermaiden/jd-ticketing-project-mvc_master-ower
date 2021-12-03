@@ -48,13 +48,15 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDTO update(ProjectDTO dto) {
         //Find current project from database
-        Project project = projectRepository.findByProjectCode(dto.getProjectCode());
+        Project project = projectRepository.findByProjectCode(dto.getProjectCode());  // project from database
         // Map update project dto to entity object
-        Project convertedProject = projectMapper.convertToEntity(dto);
+        Project convertedProject = projectMapper.convertToEntity(dto);                // project updated by smbdy
         //set id to the converted object
-        convertedProject.setId(project.getId());
+        convertedProject.setId(project.getId());                                      // get id from old version to updated one
+        // update the status again...
+        convertedProject.setProjectStatus(project.getProjectStatus());                // get Status from old version to updated one
         //save updated project
-        projectRepository.save(convertedProject);
+        projectRepository.save(convertedProject);                                     // save new version to database
 
         return getByProjectCode(dto.getProjectCode());
     }
