@@ -19,10 +19,13 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(nullable = false, updatable = false)
     private LocalDateTime insertDateTime;
+    @Column(nullable = false, updatable = false)
     private Long insertUserId;
+    @Column(nullable = false)
     private LocalDateTime lastUpdateDateTime;
+    @Column(nullable = false)
     private Long LastUpdateUserId;
 
     private Boolean isDeleted=false;

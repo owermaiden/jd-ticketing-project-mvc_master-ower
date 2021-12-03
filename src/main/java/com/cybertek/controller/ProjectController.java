@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -63,23 +64,23 @@ public class ProjectController {
 //    }
 //
 //
-//    @GetMapping("/update/{projectCode}")
-//    public String editProject(@PathVariable("projectCode") String projectCode, Model model){
-//
-//        model.addAttribute("project", projectService.findById(projectCode));
-//        model.addAttribute("projects", projectService.findAll());
-//        model.addAttribute("managers", userService.findManagers());
-//
-//        return "/project/update";
-//
-//    }
-//
-//    @PostMapping("/update/{projectCode}")
-//    public String updateProject(ProjectDTO project){
-//
-//        projectService.update(project);
-//        return "redirect:/project/create";  // redirect calls the GetMapping instead of view...
-//    }
+    @GetMapping("/update/{projectCode}")
+    public String editProject(@PathVariable("projectCode") String projectCode, Model model){
+
+        model.addAttribute("project", projectService.getByProjectCode(projectCode));
+        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("managers", userService.listAllByRole("manager"));
+
+        return "/project/update";
+
+    }
+
+    @PostMapping("/update/{projectCode}")
+    public String updateProject(ProjectDTO project){
+
+        projectService.update(project);
+        return "redirect:/project/create";  // redirect calls the GetMapping instead of view...
+    }
 //
 //
 //
