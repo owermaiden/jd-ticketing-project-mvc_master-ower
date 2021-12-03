@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserMapper userMapper;
-    private UserRepository userRepository;
+    private final UserMapper userMapper;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
         this.userMapper = userMapper;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> listAllUsers() {
         List<User> users = userRepository.findAll(Sort.by("firstName"));
-        return users.stream().map(obj -> userMapper.convertToDto(obj)).collect(Collectors.toList());
+        return users.stream().map(userMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> listAllByRole(String role) {
        List<User> users = userRepository.findAllByRoleDescriptionIgnoreCase(role);
-       return  users.stream().map(obj -> userMapper.convertToDto(obj)).collect(Collectors.toList());
+       return  users.stream().map(userMapper::convertToDto).collect(Collectors.toList());
     }
 
     // hard delete -- not good

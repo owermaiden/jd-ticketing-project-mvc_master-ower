@@ -10,13 +10,14 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceIplm implements TaskService {
 
-    private TaskMapper taskMapper;
-    private TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
+    private final TaskRepository taskRepository;
 
     public TaskServiceIplm(TaskMapper taskMapper, TaskRepository taskRepository) {
         this.taskMapper = taskMapper;
@@ -25,8 +26,8 @@ public class TaskServiceIplm implements TaskService {
 
     @Override
     public TaskDTO findById(Long id) {
-        Task task = taskRepository.findById(id).get();
-        return taskMapper.convertToDto(task);
+        Optional<Task> task = taskRepository.findById(id);
+        return task.map(taskMapper::convertToDto).orElse(null);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class TaskServiceIplm implements TaskService {
 
     @Override
     public void update(TaskDTO dto) {
-        Task task = taskRepository.getOne(dto.getId());
+        Task task = taskRepository.getOne(dto.getId());         // we could also use findById() which returns Optional
         Task convertedTask = taskMapper.convertToEntity(dto);
         convertedTask.setTaskStatus(task.getTaskStatus());
         convertedTask.setAssignedDate(task.getAssignedDate());
@@ -55,9 +56,11 @@ public class TaskServiceIplm implements TaskService {
 
     @Override
     public void delete(Long id) {
-        Task task = taskRepository.getOne(id);
-        task.setIsDeleted(true);
-        taskRepository.save(task);
+        Optional<Task> task = taskRepository.findById(id);
+        if(task.isPresent()){
+            task.get().setIsDeleted(true);
+            taskRepository.save(task.get());
+        }
     }
 
 }

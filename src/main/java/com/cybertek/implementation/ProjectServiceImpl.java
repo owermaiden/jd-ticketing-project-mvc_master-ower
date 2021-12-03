@@ -15,14 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-    private ProjectRepository projectRepository;
-    private ProjectMapper projectMapper;
-    private UserMapper userMapper;
+    private final ProjectRepository projectRepository;
+    private final ProjectMapper projectMapper;
 
     public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper, UserMapper userMapper) {
         this.projectRepository = projectRepository;
         this.projectMapper = projectMapper;
-        this.userMapper = userMapper;
     }
 
     @Override
@@ -34,7 +32,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectDTO> listAllProjects() {
         List<Project> projects = projectRepository.findAll();
-        return projects.stream().map(obj -> projectMapper.convertToDto(obj)).collect(Collectors.toList());
+        return projects.stream().map(projectMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
