@@ -2,7 +2,6 @@ package com.cybertek.implementation;
 
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.entity.Project;
-import com.cybertek.entity.User;
 import com.cybertek.enums.Status;
 import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.UserMapper;
@@ -42,7 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
     public void save(ProjectDTO dto) {
         dto.setProjectStatus(Status.OPEN);
         Project project = projectMapper.convertToEntity(dto);
-        project.setAssignedManager(userMapper.convertToEntity(dto.getAssignedManager()));
+        // project.setAssignedManager(userMapper.convertToEntity(dto.getAssignedManager()));   mapper convert this also we dont need this line actually
         projectRepository.save(project);
     }
 
@@ -62,6 +61,15 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void delete(String code) {
+        Project project = projectRepository.findByProjectCode(code);
+        project.setIsDeleted(true);
+        projectRepository.save(project);
+    }
 
+    @Override
+    public void complete(String projectCode) {
+        Project project = projectRepository.findByProjectCode(projectCode);
+        project.setProjectStatus(Status.COMPLETE);
+        projectRepository.save(project);
     }
 }

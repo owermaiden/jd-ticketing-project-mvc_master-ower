@@ -19,7 +19,7 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)  // it will not change after update...Hibernate server validations
     private LocalDateTime insertDateTime;
     @Column(nullable = false, updatable = false)
     private Long insertUserId;
