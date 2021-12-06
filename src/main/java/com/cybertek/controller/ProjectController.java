@@ -96,4 +96,13 @@ public class ProjectController {
         return "/manager/project-status";
     }
 
+
+    @GetMapping("/manager/complete/{projectCode}")
+    public String manager_completed(@PathVariable("projectCode") String projectcode){
+
+        projectService.complete(projectcode);
+
+        return "redirect:/project/manager/complete";
+    }
+
 }

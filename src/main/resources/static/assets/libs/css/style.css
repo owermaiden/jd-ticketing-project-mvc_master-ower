@@ -6973,8 +6973,11 @@ Media Query
 }
 
 
- 
- 
+.disabled-button {
+    background: #cdcdcd;
+    color: black;
+    border-color: #cdcdcd;
+    cursor: not-allowed !important;
 
 
 }
