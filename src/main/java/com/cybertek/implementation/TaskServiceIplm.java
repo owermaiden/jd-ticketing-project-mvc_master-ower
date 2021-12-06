@@ -3,10 +3,12 @@ package com.cybertek.implementation;
 import com.cybertek.dto.ProjectDTO;
 import com.cybertek.dto.TaskDTO;
 import com.cybertek.entity.Task;
+import com.cybertek.entity.User;
 import com.cybertek.enums.Status;
 import com.cybertek.mapper.ProjectMapper;
 import com.cybertek.mapper.TaskMapper;
 import com.cybertek.repository.TaskRepository;
+import com.cybertek.repository.UserRepository;
 import com.cybertek.service.TaskService;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +23,13 @@ public class TaskServiceIplm implements TaskService {
     private final TaskMapper taskMapper;
     private final TaskRepository taskRepository;
     private final ProjectMapper projectMapper;
+    private final UserRepository userRepository;
 
-    public TaskServiceIplm(TaskMapper taskMapper, TaskRepository taskRepository, ProjectMapper projectMapper) {
+    public TaskServiceIplm(TaskMapper taskMapper, TaskRepository taskRepository, ProjectMapper projectMapper, UserRepository userRepository) {
         this.taskMapper = taskMapper;
         this.taskRepository = taskRepository;
         this.projectMapper = projectMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -80,6 +84,13 @@ public class TaskServiceIplm implements TaskService {
     @Override
     public void deleteByProject(ProjectDTO project) {
         listAllByProject(project).forEach(taskDTO -> delete(taskDTO.getId()));
+    }
+
+    @Override
+    public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
+        User user = userRepository.findByUserName("erhan@erhen.com");
+        List<Task> tasks = taskRepository.findAllByTaskStatusIsNotAndAssignedEmployee(status, user);
+        return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
     }
 
     public List<TaskDTO> listAllByProject(ProjectDTO project){

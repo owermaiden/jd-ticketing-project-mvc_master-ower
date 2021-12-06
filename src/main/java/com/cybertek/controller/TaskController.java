@@ -1,6 +1,7 @@
 package com.cybertek.controller;
 
 import com.cybertek.dto.TaskDTO;
+import com.cybertek.enums.Status;
 import com.cybertek.service.ProjectService;
 import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 
 
 @Controller
@@ -71,6 +73,15 @@ public class TaskController {
 
         taskService.update(task);
         return "redirect:/task/create";  // redirect calls the GetMapping instead of view...
+    }
+
+    @GetMapping("/employee")
+    public String edit(Model model){
+
+        List<TaskDTO> tasks = taskService.listAllTasksByStatusIsNot(Status.COMPLETE);
+        model.addAttribute("tasks", tasks);
+
+        return "task/employee-tasks";
     }
 
 }
