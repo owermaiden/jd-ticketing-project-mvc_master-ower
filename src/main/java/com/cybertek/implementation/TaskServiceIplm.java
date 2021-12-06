@@ -88,9 +88,26 @@ public class TaskServiceIplm implements TaskService {
 
     @Override
     public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
-        User user = userRepository.findByUserName("erhan@erhen.com");
+        User user = userRepository.findByUserName("givyziruvy@mailinator.com");
         List<Task> tasks = taskRepository.findAllByTaskStatusIsNotAndAssignedEmployee(status, user);
         return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TaskDTO> listAllTasksByProjectManager() {
+        User user = userRepository.findByUserName("omererden18@gmail.com");
+        List<Task> tasks = taskRepository.findAllByProjectAssignedManager(user);
+        return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateStatus(TaskDTO dto) {
+        Optional<Task> task = taskRepository.findById(dto.getId());
+
+        if (task.isPresent()){
+            task.get().setTaskStatus(dto.getTaskStatus());
+            taskRepository.save(task.get());
+        }
     }
 
     public List<TaskDTO> listAllByProject(ProjectDTO project){
