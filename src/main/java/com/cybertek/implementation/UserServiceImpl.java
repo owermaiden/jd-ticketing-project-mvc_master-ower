@@ -1,10 +1,16 @@
 package com.cybertek.implementation;
 
+import com.cybertek.dto.ProjectDTO;
+import com.cybertek.dto.TaskDTO;
 import com.cybertek.dto.UserDTO;
 import com.cybertek.entity.User;
+import com.cybertek.exeption.TicketingProjectExeption;
 import com.cybertek.mapper.UserMapper;
 import com.cybertek.repository.UserRepository;
+import com.cybertek.service.ProjectService;
+import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +22,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final ProjectService projectService;
+    private final TaskService taskService;
 
-    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
+    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository, @Lazy ProjectService projectService, TaskService taskService) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
+        this.projectService = projectService;
+        this.taskService = taskService;
     }
 
     @Override
@@ -55,8 +65,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(String username) {
+    public void delete(String username) throws TicketingProjectExeption {
         User user = userRepository.findByUserName(username);
+
+        if (user == null) {
+            throw new TicketingProjectExeption("User Does Not Exist");
+        }
+
+        if (!checkIfUserCanBeDeleted(user)){
+            throw new TicketingProjectExeption("User can not be deleted... It is linked by a project or taks");
+        }
+
+        user.setUserName(user.getUserName() + "-" + user.getId());  // to re-assign the prev username again later..we are changing the deleted one to another username actually
+
         user.setIsDeleted(true);
         userRepository.save(user);
     }
@@ -71,5 +92,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteByUserName(String username) {
         userRepository.deleteByUserName(username);
+    }
+
+    @Override
+    public boolean checkIfUserCanBeDeleted(User user) {
+
+        switch (user.getRole().getDescription()){
+            case "Manager" :
+                List<ProjectDTO> projectList = projectService.readAllByAssignedManager(user);
+                return projectList.size() == 0;
+            case "Employee" :
+                List<TaskDTO> taskList = taskService.readAllByEmployee(user);
+                return taskList.size() == 0;
+            default:
+                return true;
+        }
     }
 }

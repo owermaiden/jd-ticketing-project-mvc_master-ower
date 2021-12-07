@@ -1,6 +1,7 @@
 package com.cybertek.controller;
 
 import com.cybertek.dto.UserDTO;
+import com.cybertek.exeption.TicketingProjectExeption;
 import com.cybertek.service.RoleService;
 import com.cybertek.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class UserController {
     }
 
     @GetMapping("/delete/{username}")
-    public String deleteUserById(@PathVariable("username") String username, Model model){
+    public String deleteUserById(@PathVariable("username") String username, Model model) throws TicketingProjectExeption {
 
         userService.delete(username);
         return "redirect:/user/create";  // redirect calls the GetMapping instead of view...

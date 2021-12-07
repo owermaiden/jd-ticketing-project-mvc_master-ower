@@ -89,19 +89,22 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectDTO> getProjectsByAssignedManager() {
-        UserDTO user = userService.findByUserName("omererden18@gmail.com");
-        User manager = userMapper.convertToEntity(user);
-        List<Project> projects = projectRepository.findProjectsByAssignedManager(manager);
-        return projects.stream()
-                        .map(projectMapper::convertToDto)
-                        .map(this::setTaskCounts)
-                        .collect(Collectors.toList());
+        UserDTO currentUserDTO = userService.findByUserName("omererden18@gmail.com");
+        User user = userMapper.convertToEntity(currentUserDTO);
+        List<Project> list = projectRepository.findAllByAssignedManager(user);
+
+        return list.stream().map(project -> {
+            ProjectDTO obj = projectMapper.convertToDto(project);
+            obj.setUnfinishedTaskCounts(taskService.totalNonCompletedTasks(project.getProjectCode()));
+            obj.setCompleteTaskCounts(taskService.totalCompletedTasks(project.getProjectCode()));
+            return obj;
+        }).collect(Collectors.toList());
     }
 
-
-    private ProjectDTO setTaskCounts(ProjectDTO dto){
-        dto.setUnfinishedTaskCounts(taskService.totalNonCompletedTasks(dto.getProjectCode()));
-        dto.setCompleteTaskCounts(taskService.totalCompletedTasks(dto.getProjectCode()));
-        return dto;
+    @Override
+    public List<ProjectDTO> readAllByAssignedManager(User user) {
+        List<Project> projects = projectRepository.findAllByAssignedManager(user);
+        return projects.stream().map(projectMapper::convertToDto).collect(Collectors.toList());
     }
+
 }
