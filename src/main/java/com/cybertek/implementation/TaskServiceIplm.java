@@ -110,6 +110,13 @@ public class TaskServiceIplm implements TaskService {
         }
     }
 
+    @Override
+    public List<TaskDTO> listAllTasksByStatus(Status status) {
+        User user = userRepository.findByUserName("givyziruvy@mailinator.com");
+        List<Task> tasks = taskRepository.findAllByTaskStatusAndAssignedEmployee(Status.COMPLETE,user);
+        return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
     public List<TaskDTO> listAllByProject(ProjectDTO project){
         List<Task> tasks = taskRepository.findAllByProject(projectMapper.convertToEntity(project));
         return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());

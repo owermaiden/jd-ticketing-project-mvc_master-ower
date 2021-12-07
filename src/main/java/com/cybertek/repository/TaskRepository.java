@@ -19,6 +19,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findAllByProjectAssignedManager(User user);
 
+    List<Task> findAllByTaskStatusAndAssignedEmployee(Status status, User user);
+
     @Query("SELECT COUNT(t) FROM Task t WHERE t.project.projectCode = ?1 AND t.taskStatus <> 'COMPLETED' ")
     int totalNonCompleteTask(String projectCode);
 

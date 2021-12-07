@@ -105,4 +105,11 @@ public class TaskController {
         return "redirect:/task/employee";
     }
 
+    @GetMapping("/archive")
+    public String employee_archive(Model model){
+
+        model.addAttribute("tasks", taskService.listAllTasksByStatus(Status.COMPLETE));
+        return "task/employee-archive";
+    }
+
 }
