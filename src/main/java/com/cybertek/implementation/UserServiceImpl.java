@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ProjectService projectService;
     private final TaskService taskService;
-
+                                                                // circular dependency problem solve....@Lazy
     public UserServiceImpl(UserMapper userMapper, UserRepository userRepository, @Lazy ProjectService projectService, TaskService taskService) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (!checkIfUserCanBeDeleted(user)){
-            throw new TicketingProjectExeption("User can not be deleted... It is linked by a project or taks");
+            throw new TicketingProjectExeption("User can not be deleted... It is linked by a project or tasks");
         }
 
         user.setUserName(user.getUserName() + "-" + user.getId());  // to re-assign the prev username again later..we are changing the deleted one to another username actually
