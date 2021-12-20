@@ -10,6 +10,7 @@
         <module name="jd-ticketing-project-mvc_master-ower" />
         <module name="jd-ticketing-project-mvc_me" />
         <module name="jd-ticketing-project-orm" />
+        <module name="jd-ticketing-security" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
       <module name="jd-ticketing-project-mvc_master-ower" options="-parameters" />
       <module name="jd-ticketing-project-mvc_me" options="-parameters" />
       <module name="jd-ticketing-project-orm" options="-parameters" />
+      <module name="jd-ticketing-security" options="-parameters" />
     </option>
   </component>
 </project>

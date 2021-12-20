@@ -22,13 +22,14 @@ public class User extends BaseEntity{
     private String lastName;
     @Column(unique = true)
     private String userName;
+    private String passWord;
     private boolean enabled;
     private String phone;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 

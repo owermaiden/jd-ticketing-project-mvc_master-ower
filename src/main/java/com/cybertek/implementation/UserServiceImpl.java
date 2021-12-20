@@ -12,6 +12,7 @@ import com.cybertek.service.TaskService;
 import com.cybertek.service.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,12 +25,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ProjectService projectService;
     private final TaskService taskService;
+    private final PasswordEncoder passwordEncoder;
                                                                 // circular dependency problem solve....@Lazy
-    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository, @Lazy ProjectService projectService, TaskService taskService) {
+    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository, @Lazy ProjectService projectService, TaskService taskService, PasswordEncoder passwordEncoder) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.projectService = projectService;
         this.taskService = taskService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -46,7 +49,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserDTO dto) {
+
+        User foundUser = userRepository.findByUserName(dto.getUserName());
+        dto.setEnabled(true);
         User user = userMapper.convertToEntity(dto);
+        user.setPassWord(passwordEncoder.encode(user.getPassWord()));
         userRepository.save(user);
     }
 
