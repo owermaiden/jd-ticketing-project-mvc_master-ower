@@ -87,7 +87,7 @@ public class ProjectController {
 
 
 
-    @GetMapping("/manager/status")
+    @GetMapping("/manager/complete")
     public String getProjectsByManager(Model model){
 
         List<ProjectDTO> projects = projectService.getProjectsByAssignedManager();

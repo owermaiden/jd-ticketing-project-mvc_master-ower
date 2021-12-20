@@ -65,6 +65,10 @@ public class UserServiceImpl implements UserService {
         User convertedUser = userMapper.convertToEntity(dto);
         //set id to the converted object
         convertedUser.setId(user.getId());
+        //set password
+        convertedUser.setPassWord(passwordEncoder.encode(convertedUser.getPassWord()));
+        // set isenabled
+        convertedUser.setEnabled(true);
         //save updated user
         userRepository.save(convertedUser);
 

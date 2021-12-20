@@ -118,7 +118,11 @@
                                                     <!-- th:field and th:select doesnt work at the same time,  -->
                                                     <select th:field="*{role}"  class="custom-select" aria-label="Default select example">
                                                         <!-- <option th:value=" ''" th:text="Select"></option>    Bu bölümü sildik....-->
-                                                         <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.description}"></option>
+                                                         <option th:each="r : ${roles}"
+                                                                 th:value="${r.id}"
+                                                                 th:text="${r.description}"
+                                                                 th:selected="(${r.id} == *{role.id})"
+                                                         ></option>
                                                      </select>
                                                  </div>
                                              </div>
