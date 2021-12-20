@@ -116,7 +116,7 @@
                                                 <div class="form-group">
                                                     <label >Choose a Role</label>
                                                     <!-- th:field and th:select doesnt work at the same time,  -->
-                                                    <select th:field="*{role}"  class="custom-select" aria-label="Default select example">
+                                                    <select name="role" class="custom-select" aria-label="Default select example" required="required">
                                                         <!-- <option th:value=" ''" th:text="Select"></option>    Bu bölümü sildik....-->
                                                          <option th:each="r : ${roles}"
                                                                  th:value="${r.id}"

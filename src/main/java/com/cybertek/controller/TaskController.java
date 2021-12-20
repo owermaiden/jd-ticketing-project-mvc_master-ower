@@ -34,7 +34,7 @@ public class TaskController {
 
         model.addAttribute("task", new TaskDTO());
         model.addAttribute("tasks", taskService.listAllTasks());
-        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("projects", projectService.listAllNonCompletedProjects());
         model.addAttribute("employees", userService.listAllByRole("employee"));
 
         return "task/create";
@@ -61,7 +61,7 @@ public class TaskController {
 
         model.addAttribute("task", taskService.findById(id));
         model.addAttribute("tasks", taskService.listAllTasks());
-        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("projects", projectService.listAllNonCompletedProjects());
         model.addAttribute("employees", userService.listAllByRole("employee"));
 
         return "/task/update";
@@ -92,7 +92,7 @@ public class TaskController {
 
         model.addAttribute("task" , task);
         model.addAttribute("users", userService.listAllByRole("employee"));
-        model.addAttribute("projects", projectService.listAllProjects());
+        model.addAttribute("projects", projectService.listAllNonCompletedProjects());
         model.addAttribute("tasks", tasks);
         model.addAttribute("statuses", Status.values());
 
@@ -105,7 +105,7 @@ public class TaskController {
         return "redirect:/task/employee";
     }
 
-    @GetMapping("/archive")
+    @GetMapping("/employee/archive")
     public String employee_archive(Model model){
 
         model.addAttribute("tasks", taskService.listAllTasksByStatus(Status.COMPLETE));
